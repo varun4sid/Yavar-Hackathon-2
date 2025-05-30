@@ -1,0 +1,11 @@
+#dev
+.vscode
+.venv
+image-captioning-model.rar
+__pycache__
+*_folder
+Pip*
+
+#Models and datasets
+src/blip-finetuned-coco*
+dataset

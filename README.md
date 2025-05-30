@@ -148,3 +148,82 @@ Metadata can be populated manually or conveniently added through the GUI.
 ---
 
 * All models and libraries utilized in this project are **open-source**
+
+
+
+
+# 📄 BLIP-2 Fine-Tuning Script
+
+## 📝 Overview
+
+This script fine-tunes the [BLIP-2 base model](https://huggingface.co/Salesforce/blip-image-captioning-base) on the **COCO 2014 Image Captioning** dataset. It uses the Hugging Face `transformers` library and PyTorch `Trainer` API for training.
+
+---
+
+## 🗂️ File Structure
+```bash
+project/
+│
+├── script.py # This fine-tuning script
+├── dataset/
+│ └── train2014/ # Folder containing COCO training images
+│ └── annotations_trainval2014/ # Folder with annotation files
+│ └── captions_train2014.json # COCO 2014 captions file
+└── blip-finetuned-coco_full/ # Output directory after fine-tuning
+```
+
+
+---
+
+## ⚙️ Requirements
+
+- Python 3.8+
+- PyTorch
+- Transformers
+- Pillow
+- COCO 2014 Dataset (images + annotations)
+
+Install dependencies:
+
+```bash
+pip install torch torchvision transformers pillow
+```
+
+For Windows users, these commands work similarly. Use PowerShell or Command Prompt with an active Python environment.
+
+## 🧾 Dataset
+
+- COCO 2014 (Common Objects in Context)
+- Images: train2014/
+- Captions: captions_train2014.json
+
+The script reads all (or limited) image-caption pairs using the max_samples argument.
+
+## 📦 Components
+
+### 1. COCODataset Class
+A custom PyTorch Dataset that loads images and captions and processes them for training.
+```python
+COCODataset(image_dir, annotation_path, processor, max_samples=None)
+```
+- image_dir: Directory containing training images.
+- annotation_path: Path to captions_train2014.json.
+- processor: BLIP processor (for text/image preprocessing).
+- max_samples: Optional cap on dataset size.
+
+The output is formatted for the Hugging Face Trainer API.
+
+### 2. BLIP Model and Processor
+```python
+processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
+model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
+```
+
+### 3. TrainingArguments
+Key parameters:
+-batch_size: 32
+-epochs: 3
+-learning_rate: 5e-5
+-logging_steps: 10
+-save_steps: 500
+-output_dir: ./blip-finetuned-coco_full

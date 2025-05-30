@@ -92,6 +92,8 @@ You have two options for generating captions: via a graphical user interface (GU
     * Fill in the contextual metadata fields.
     * Click "**Submit & Generate Captions**."
   ![Screenshot from 2025-05-30 23-04-48](https://github.com/user-attachments/assets/95a0c74d-9d00-4a2b-9f0b-d62f5a68da5e)
+  ![Screenshot from 2025-05-31 00-35-46](https://github.com/user-attachments/assets/a659ce88-23fa-490b-9353-814730ae8c07)
+
   
 4.  The annotated image will be saved in `output_folder/`, and the captions (with confidence scores) will be saved in `captions.json`.
 
@@ -150,53 +152,3 @@ Metadata can be populated manually or conveniently added through the GUI.
 * All models and libraries utilized in this project are **open-source**.
 * Fine-tuning was conducted on a relatively small dataset due to hardware limitations.
 * Both **GUI and command-line interfaces** are fully supported for your convenience.
-
-
-
-
-## Installation and Setup
-###1. Clone the repository and enter its directory
-```bash
-git clone https://github.com/varun4sid/Yavar-Hackathon-2.git
-cd Yavar-Hackathon-2
-```
-###2. Install the necessary system packages (If you're on Windows, make sure to have python3, pip and python3-venv installed, and skip this step)
-```bash
-sudo apt-get install $(cat packages.txt)
-```
-3. Create a virtual environment and activate it.
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-4. Install the necessary libraries in the environment.
-```bash
-pip install -r requirements.txt
-```
-5. Download the fine-tuned model uploaded <a href="https://drive.google.com/file/d/1QT0MqO-rCJaonfdYyB3l1gUUVrN8Ab7q/view?usp=drive_link">here</a> and place it in src/
-
-## Project Specifications
-<table>
-<tbody>
-<tr><td>VLM</td><td>BLIP-2-base</td></tr>
-<tr><td>Dataset</td><td></td></tr>
-</tbody>
-</table>
-- I have used the cosine similarity measurement for evaluating the genarated caption.
-
-## Usage
-1. Add image and context through a GUI.
-```bash
-cd src/
-python3 gui_caption_gen.py
-```
-
-2. Run the following command that generates output in the output folder
-```bash
-python3 caption_gen.py
-```
-
-## Challenges Faced
-+ I couldn't find a dataset with images of tables, charts, etc., along with the metadata context for fine tuning.
-+ I couldn't utilize my GPU as the CUDA drivers required by Pytorch couldn't communicate with my GPU.
-+ As a result, fine-tuning using the COCO dataset took 8+ hours using the CPU.

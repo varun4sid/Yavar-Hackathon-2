@@ -24,7 +24,7 @@ The model is fine-tuned on a subset of the **COCO Image Captioning Dataset** usi
 | Component     | Description                                                  |
 |---------------|--------------------------------------------------------------|
 | VLM           | salesforce/blip2 (BLIP-2 Base)                               |
-| Dataset       | COCO Image Captioning Dataset (30k subset)                  |
+| Dataset       | <a href="https://www.kaggle.com/datasets/nikhil7280/coco-image-caption?resource=download">COCO Image Captioning Dataset</a>(30k subset)                  |
 | Fine-Tuning   | Conducted using both visual and textual metadata context     |
 | Metric        | Cosine similarity used for semantic confidence scoring       |
 | Image Types   | Tables, graphs, charts, layout diagrams, logos, photos, etc. |
@@ -177,7 +177,7 @@ pip install -r requirements.txt
 <table>
 <tbody>
 <tr><td>VLM</td><td>BLIP-2-base</td></tr>
-<tr><td>Dataset</td><td><a href="https://www.kaggle.com/datasets/nikhil7280/coco-image-caption?resource=download">COCO Image Captioning Dataset</a></td></tr>
+<tr><td>Dataset</td><td></td></tr>
 </tbody>
 </table>
 - I have used the cosine similarity measurement for evaluating the genarated caption.

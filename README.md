@@ -130,7 +130,7 @@ Metadata can be populated manually or conveniently added through the GUI.
 ---
 
 ## 📂 Directory Structure
-
+```bash
 ├── img_folder/           # Input images
 ├── metadata_folder/      # Metadata for each image
 ├── output_folder/        # Annotated images + captions.json
@@ -140,7 +140,7 @@ Metadata can be populated manually or conveniently added through the GUI.
 │   ├── model.py
 │   ├── utils.py
 │   └── blip-finetuned-coco_full/ # Place the downloaded model here
-
+```
 ---
 
 ## 📌 Notes

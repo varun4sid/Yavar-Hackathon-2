@@ -1,0 +1,9 @@
+[
+    {
+        "image": "mlpandbp.png",
+        "concise_caption": "backpropagation to train multilayer architectures for a system",
+        "concise_confidence": 0.964,
+        "detailed_caption": "backpropagation to train multilayer architectures the backpropagation equation can be applied repeatedly to propagate gradients through all modules, starting from the output at the top ( where the network produces its prediction ) all the way to the bottom ( where the external input is fed ). once these gradients have been computed, it is straightforward to compute the gradients with respect to the weights of each module. figure 1 : multilayer neural networks and backpropagation.",
+        "detailed_confidence": 1.0
+    }
+]

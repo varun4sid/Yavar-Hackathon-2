@@ -50,10 +50,10 @@ if __name__ == "__main__":
     device = torch.device("cpu")
     model.to(device)
 
-    dataset = COCODataset(image_dir, annotation_path, processor, max_samples=2000)
+    dataset = COCODataset(image_dir, annotation_path, processor, max_samples=40000)
 
     training_args = TrainingArguments(
-        output_dir="./blip-finetuned-coco_2000sample",
+        output_dir="./blip-finetuned-coco_full",
         per_device_train_batch_size=32,
         num_train_epochs=3,
         learning_rate=5e-5,
@@ -76,7 +76,7 @@ if __name__ == "__main__":
 
     trainer.train()
 
-    model.save_pretrained("./blip-finetuned-coco")
-    processor.save_pretrained("./blip-finetuned-coco")
+    model.save_pretrained("./blip-finetuned-coco_full")
+    processor.save_pretrained("./blip-finetuned-coco_full")
 
-    print("\n✅ Fine-tuning complete. Model saved to ./blip-finetuned-coco")
+    print("\n✅ Fine-tuning complete. Model saved to blip-finetuned-coco_full/")

@@ -3,15 +3,15 @@ from PIL import Image
 import torch
 
 device = torch.device("cpu")
-model = BlipForConditionalGeneration.from_pretrained("./blip-finetuned-coco").to(device)
-processor = BlipProcessor.from_pretrained("./blip-finetuned-coco")
+model = BlipForConditionalGeneration.from_pretrained("./blip-finetuned-coco_full").to(device)
+processor = BlipProcessor.from_pretrained("./blip-finetuned-coco_full")
 model.eval()
 
 def generate_captions(image_path, metadata):
     image = Image.open(image_path).convert("RGB")
 
     if any(metadata.values()):
-        concise_prompt = f"Give a short summary of this figure. {metadata.get('section_header', '')}"
+        concise_prompt = f"{metadata.get('section_header', '')}"
         context = " ".join([
             metadata.get("section_header", ""),
             metadata.get("above_text", ""),
@@ -19,7 +19,7 @@ def generate_captions(image_path, metadata):
             metadata.get("footnote", ""),
             metadata.get("below_text", "")
         ])
-        detailed_prompt = f"Describe this figure in detail considering the context: {context}"
+        detailed_prompt = f"{context}"
 
         with torch.no_grad():
             concise_inputs = processor(image, concise_prompt, return_tensors="pt").to(device)

@@ -20,10 +20,13 @@ def load_metadata(metadata_path):
 
     return metadata
 
+
 def compute_confidence(prompt, caption):
     embeddings = similarity_model.encode([prompt, caption], convert_to_tensor=True)
     score = float(util.pytorch_cos_sim(embeddings[0], embeddings[1])[0])
     return round(score, 3)
+
+
 def parse_metadata_txt(content):
     lines = content.strip().split("\n")
     meta = {}

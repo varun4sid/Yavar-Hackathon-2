@@ -23,6 +23,19 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-For fine-tuning, I have used the <a href="https://www.kaggle.com/datasets/nikhil7280/coco-image-caption?resource=download">COCO Image Captioning Dataset</a>
+## Project Specifications
+<table>
+<tbody>
+<tr><td>Device</td><td>HP-Victus</td></tr>
+<tr><td>GPU</td><td>Nvidia RTX 3050</td></tr>
+<tr><td>VLM</td><td>BLIP-2-base</td></tr>
+<tr><td>Dataset used</td><td><a href="https://www.kaggle.com/datasets/nikhil7280/coco-image-caption?resource=download">COCO Image Captioning Dataset</a></td></tr>
+<tr><td>Device</td><td>HP-Victus</td></tr>
+</tbody>
+</table>
 
-I have used the cosine similarity measurement for evaluating the genarated caption against the metadata.
+
+## Summary
+- I have used the cosine similarity measurement for evaluating the genarated caption against the metadata.
+
++ Fine-tuned model uploaded <a href="https://drive.google.com/file/d/1QT0MqO-rCJaonfdYyB3l1gUUVrN8Ab7q/view?usp=drive_link">here</a>.

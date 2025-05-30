@@ -1,5 +1,5 @@
 """
-A GUI for uploading images and context to get a caption-annotated image
+A GUI for uploading images and context to get a caption-annotated image from the fine-tuned model
 """
 import os
 import json
@@ -92,6 +92,8 @@ def save_files_and_generate():
         json.dump(all_captions, f, indent=2)
 
     caption_label.config(text="✅ Captioning Complete. Output saved.")
+    
+    root.destroy()
 
 def upload_image():
     global img_path, img_tk

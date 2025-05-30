@@ -9,26 +9,26 @@ from PIL import Image, ImageDraw, ImageFont
 from transformers import BlipProcessor, BlipForConditionalGeneration
 import torch
 from utils import load_metadata, compute_confidence
-from PIL import Image, ImageDraw, ImageFont
 
-
+# Directories
 image_dir = "../img_folder"
 metadata_dir = "../metadata_folder"
 output_dir = "../output_folder"
 os.makedirs(output_dir, exist_ok=True)
 
+# Device and model loading
 device = torch.device("cpu")
-model = BlipForConditionalGeneration.from_pretrained("./blip-finetuned-coco").to(device)
-processor = BlipProcessor.from_pretrained("./blip-finetuned-coco")
+model = BlipForConditionalGeneration.from_pretrained("./blip-finetuned-coco_full").to(device)
+processor = BlipProcessor.from_pretrained("./blip-finetuned-coco_full")
 model.eval()
 
+# Default font
 font = ImageFont.load_default()
 results = []
 
 def generate_captions(image_path, metadata):
     image = Image.open(image_path).convert("RGB")
 
-    # Check if any metadata field is non-empty
     metadata_text = " ".join([
         metadata.get("section_header", "").strip(),
         metadata.get("above_text", "").strip(),
@@ -43,7 +43,7 @@ def generate_captions(image_path, metadata):
 
     with torch.no_grad():
         if use_prompts:
-            concise_prompt = f"Give a short summary of this figure. {metadata.get('section_header', '')}"
+            concise_prompt = metadata.get("section_header", "")
             context = " ".join([
                 metadata.get("section_header", ""),
                 metadata.get("above_text", ""),
@@ -51,7 +51,7 @@ def generate_captions(image_path, metadata):
                 metadata.get("footnote", ""),
                 metadata.get("below_text", "")
             ])
-            detailed_prompt = f"Describe this figure in detail considering the context: {context}"
+            detailed_prompt = context
 
             concise_inputs = processor(image, concise_prompt, return_tensors="pt").to(device)
             concise_output = model.generate(**concise_inputs, max_length=64)
@@ -67,7 +67,6 @@ def generate_captions(image_path, metadata):
             concise_caption = detailed_caption = caption
 
     return concise_caption, detailed_caption, concise_prompt, detailed_prompt
-
 
 def annotate_image(image_path, concise, detailed, c_score, d_score):
     image = Image.open(image_path).convert("RGB")
@@ -90,7 +89,10 @@ def annotate_image(image_path, concise, detailed, c_score, d_score):
 
     return new_img
 
+# Load fallback empty metadata format
+empty_metadata = load_metadata('./metadata_format.txt')
 
+# Main processing loop
 for file in os.listdir(image_dir):
     if not file.lower().endswith((".jpg", ".jpeg", ".png")):
         continue
@@ -98,11 +100,12 @@ for file in os.listdir(image_dir):
     image_path = os.path.join(image_dir, file)
     metadata_path = os.path.join(metadata_dir, os.path.splitext(file)[0] + ".txt")
 
-    if not os.path.exists(metadata_path):
-        print(f"❌ Missing metadata for {file}")
-        continue
+    if os.path.exists(metadata_path):
+        metadata = load_metadata(metadata_path)
+    else:
+        # print(f"❌ Missing metadata for {file}")
+        metadata = empty_metadata
 
-    metadata = load_metadata(metadata_path)
     concise, detailed, c_prompt, d_prompt = generate_captions(image_path, metadata)
     c_score = compute_confidence(c_prompt, concise)
     d_score = compute_confidence(d_prompt, detailed)
@@ -118,6 +121,7 @@ for file in os.listdir(image_dir):
         "detailed_confidence": d_score
     })
 
+# Save results
 with open(os.path.join(output_dir, "captions.json"), "w") as f:
     json.dump(results, f, indent=4)
 

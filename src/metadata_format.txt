@@ -1,0 +1,6 @@
+section_header: 
+above_text:  
+caption: 
+footnote: 
+below_text:
+picture_id: 

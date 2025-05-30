@@ -147,8 +147,4 @@ Metadata can be populated manually or conveniently added through the GUI.
 ```
 ---
 
-## 📌 Notes
-
-* All models and libraries utilized in this project are **open-source**.
-* Fine-tuning was conducted on a relatively small dataset due to hardware limitations.
-* Both **GUI and command-line interfaces** are fully supported for your convenience.
+* All models and libraries utilized in this project are **open-source**

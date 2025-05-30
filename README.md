@@ -221,9 +221,9 @@ model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-capt
 
 ### 3. TrainingArguments
 Key parameters:
--batch_size: 32
--epochs: 3
--learning_rate: 5e-5
--logging_steps: 10
--save_steps: 500
--output_dir: ./blip-finetuned-coco_full
+- batch_size: 32
+- epochs: 3
+- learning_rate: 5e-5
+- logging_steps: 10
+- save_steps: 500
+- output_dir: ./blip-finetuned-coco_full

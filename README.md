@@ -91,6 +91,8 @@ You have two options for generating captions: via a graphical user interface (GU
     * Upload an image.
     * Fill in the contextual metadata fields.
     * Click "**Submit & Generate Captions**."
+  ![Screenshot from 2025-05-30 23-04-48](https://github.com/user-attachments/assets/95a0c74d-9d00-4a2b-9f0b-d62f5a68da5e)
+  
 4.  The annotated image will be saved in `output_folder/`, and the captions (with confidence scores) will be saved in `captions.json`.
 
 ### Option 2: Command-line caption generation
@@ -188,7 +190,6 @@ pip install -r requirements.txt
 cd src/
 python3 gui_caption_gen.py
 ```
-![Screenshot from 2025-05-30 23-04-48](https://github.com/user-attachments/assets/95a0c74d-9d00-4a2b-9f0b-d62f5a68da5e)
 
 2. Run the following command that generates output in the output folder
 ```bash
